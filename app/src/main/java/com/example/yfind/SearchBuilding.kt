@@ -7,8 +7,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.Menu
 import com.esri.arcgisruntime.concurrent.ListenableFuture
 import com.esri.arcgisruntime.data.FeatureQueryResult
 import com.esri.arcgisruntime.data.QueryParameters
@@ -18,10 +17,12 @@ import com.esri.arcgisruntime.layers.FeatureLayer
 import java.util.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.view.View
 import android.widget.*
 import com.esri.arcgisruntime.data.Feature
 import com.esri.arcgisruntime.data.QueryParameters.*
+
+
+
 
 
 class SearchBuilding : AppCompatActivity() {
@@ -46,21 +47,20 @@ class SearchBuilding : AppCompatActivity() {
 //        lv.adapter = ListExampleAdapter(this)
         searchBuildings("")
 
-
     }
 
-
-    override fun onNewIntent(intent: Intent) {
-        this.intent = intent
-
-        if (Intent.ACTION_SEARCH == intent.action) {
-            intent.getStringExtra(SearchManager.QUERY)?.let {
-                if (it.isNotEmpty()) {
-                    searchBuildings(it)
-                }
-            }
-        }
-    }
+//
+//    override fun onNewIntent(intent: Intent) {
+//        this.intent = intent
+//
+//        if (Intent.ACTION_SEARCH == intent.action) {
+//            intent.getStringExtra(SearchManager.QUERY)?.let {
+//                if (it.isNotEmpty()) {
+//                    searchBuildings(it)
+//                }
+//            }
+//        }
+//    }
 
     private fun searchBuildings(searchString: String) {
 
@@ -114,6 +114,37 @@ class SearchBuilding : AppCompatActivity() {
             }
         }
     }
+    override
+    fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        // Inflate menu to add items to action bar if it is present.
+        inflater.inflate(R.menu.menu_main, menu)
+        // Associate searchable configuration with the SearchView
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.id.action_search).getActionView() as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(it: String): Boolean {
+                if (it.isNotEmpty()) {
+                    searchBuildings(it)
+                }
+                return false
+            }
+
+            override fun onQueryTextSubmit(it: String): Boolean {
+                searchBuildings(it)
+                return false
+            }
+
+        })
+
+        searchView.setSearchableInfo(
+            searchManager.getSearchableInfo(componentName)
+        )
+
+        return true
+    }
+
 //    override
 //    fun onCreateOptionsMenu(menu: Menu): Boolean {
 //        menuInflater.inflate(R.menu.menu_main, menu)
