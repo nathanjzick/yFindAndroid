@@ -12,8 +12,6 @@ import com.esri.arcgisruntime.concurrent.ListenableFuture
 import com.esri.arcgisruntime.data.FeatureQueryResult
 import com.esri.arcgisruntime.data.QueryParameters
 import com.esri.arcgisruntime.data.ServiceFeatureTable
-import com.esri.arcgisruntime.layers.FeatureLayer
-
 import java.util.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -81,7 +79,7 @@ class SearchBuilding : AppCompatActivity() {
                 val resultIterator = result.iterator()
                 print(result.toString())
                 if(result.count() > 0){
-                    var results: List<String> = result.map { it.attributes["Acronym"].toString() }
+                    var results: List<String> = result.map { it.attributes["Acronym"].toString() + " | " + it.attributes["Name"].toString() }
 //                    while (resultIterator.hasNext()){
 //                        results.add(resultIterator.next().attributes["Acronym"].toString())
 //                    }
@@ -137,34 +135,12 @@ class SearchBuilding : AppCompatActivity() {
             }
 
         })
-
+        searchView.setIconifiedByDefault(false)
         searchView.setSearchableInfo(
             searchManager.getSearchableInfo(componentName)
         )
 
         return true
     }
-
-//    override
-//    fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//
-//        val searchItem = menu.findItem(R.id.action_search)
-//        val searchView = searchItem.getActionView() as SearchView
-//        searchView.setOnQueryTextListener(this)
-//
-//        return true
-//    }
-//
-//    fun onQueryTextChange(query: String): Boolean {
-//        // Here is where we are going to implement the filter logic
-//        return false
-//    }
-//
-//    fun onQueryTextSubmit(query: String): Boolean {
-//        return false
-//    }
-
-
 }
 
