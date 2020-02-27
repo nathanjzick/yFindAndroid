@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">yFind</string>
+    <string name="action_search">Search</string>
+    <string name="search_hint">Search Building</string>
+    <string name="buildings_url">https://services.arcgis.com/FvF9MZKp3JWPrSkg/arcgis/rest/services/Campus_Buildings/FeatureServer/0</string>
+    <string name="rooms_url">https://services.arcgis.com/FvF9MZKp3JWPrSkg/arcgis/rest/services/Floorplans_V/FeatureServer/0</string>
 </resources>

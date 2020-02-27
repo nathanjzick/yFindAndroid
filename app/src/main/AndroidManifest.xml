@@ -3,7 +3,10 @@
     package="com.example.yfind">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -12,12 +15,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+
+        <activity android:name=".MainActivity" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.SEARCH" />-->
+<!--            </intent-filter>-->
+<!--            <meta-data android:name="android.app.searchable"-->
+<!--                android:resource="@xml/searchable"/>-->
+        </activity>
+
+        <activity android:name=".SearchBuilding" android:launchMode="singleTop">
+                <intent-filter>
+                    <action android:name="android.intent.action.SEARCH" />
+                </intent-filter>
+                <meta-data android:name="android.app.searchable"
+                    android:resource="@xml/searchable"/>
         </activity>
     </application>
 
